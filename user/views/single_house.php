@@ -8,16 +8,7 @@
     ?>
     <title>Document</title>
     <style>
-        .bod {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-
-            .row{
-                height:60% !important
-            }
+            
     </style>
 </head>
 <body>
@@ -30,11 +21,11 @@
             while($row = mysqli_fetch_assoc($result)){
     ?>
         <div class="container bod ">
-            <div class="row shadow p-4 ">
-                <div class="col-lg-6">
-                    <img width="100%" height="100%" src="../../images/<?php echo $row ['image'] ?>" alt="">
+            <div class="row shadow p-4" style="overflow: hidden;">
+                <div class="col-lg-6" >
+                    <img width="100%" height="400px" style="object-fit: cover;" src="../../images/<?php echo $row ['image'] ?>" alt="">
                 </div>
-                <div class="col-lg-6 text-capitalize justify-content-center  d-flex flex-column">
+                <div class="col-lg-6 text-capitalize">
                     <h1 style=""><span class="text-info"> <?php echo $row['name']?></span></h1>
                     <h4 class="text-secondary">
                         Price: <span class="text-info"> Rs.<?php echo $row['price'] ?></span>
@@ -54,9 +45,19 @@
                             <?php echo $row['info'] ?>
                         </span>
                     </h5>
+                    <h5 class="text-secondary">
+                        Location: <span class="text-info">
+                            <?php echo $row['location'] ?>
+                        </span>
+                    </h5>
                     
+                <iframe width="100%" height="150px" src="https://maps.google.com/maps?q=<?php echo  $row ['location'] ?>&output=embed"></iframe>
+                        <a class="btn btn-info w-100" href="../controller/send_mail.php?id=<?php echo $row['id']?>">
+                            Contact the owner
+                        </a>
                 </div>
             </div>
+
         </div>
     <?php }}?>
 </body>

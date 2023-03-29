@@ -6,6 +6,8 @@
     $size = $_POST['size'];
     $bedrooms = $_POST['bedrooms'];
     $bathrooms = $_POST['bathrooms'];
+    $type = $_POST['type'];
+    $location = $_POST['location'];
     $errors = [];
     if(empty($name)){
         $errors['name'] = 'Name Required';
@@ -17,8 +19,8 @@
         move_uploaded_file($tmp_name,'../../images/' . $filename);
     }
     if(empty($errors)){
-    $insert = "INSERT INTO `houses`(`name`, `price`, `info`, `size`, `bedrooms`, `bathrooms`, `image`) 
-    VALUES ('{$name}','{$price}','{$info}',{$size},{$bedrooms},{$bathrooms},'{$filename}')";
+    $insert = "INSERT INTO `houses`(`name`, `price`, `info`, `size`, `bedrooms`, `bathrooms`, `type`, `location`, `image`) 
+    VALUES ('{$name}','{$price}','{$info}',{$size},{$bedrooms},{$bathrooms},'{$type}','{$location}','{$filename}')";
     $query = mysqli_query($connection,$insert);
     // display the flash message
     session_start();

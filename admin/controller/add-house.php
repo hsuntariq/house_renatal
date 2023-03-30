@@ -16,13 +16,11 @@
     if(isset($_FILES['image'])){
         $filename = $_FILES['image']['name'];
         $tmp_name = $_FILES['image']['tmp_name'];
-        $type = $_FILES['image']['type'];
         move_uploaded_file($tmp_name,'../../images/' . $filename);
     }
     if(isset($_FILES['video'])){
         $videoname = $_FILES['video']['name'];
         $video_tmp_name = $_FILES['video']['tmp_name'];
-        $type = $_FILES['video']['type'];
         move_uploaded_file($video_tmp_name,'../../videos/' . $videoname);
     }
     if(empty($errors)){

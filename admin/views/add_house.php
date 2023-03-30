@@ -60,29 +60,28 @@
                 . $_SESSION['message'] ."</div>";
             }
         ?>
-        <!-- <a href="../../index.php">Home</a> -->
         <div class="sidebar">
             <a href="http://localhost/FYP/">
                 <i class="bi bi-house">
                     <h6> Add House</h6>
                 </i>
             </a>
-            <a href="../../index.php">
+            <a href="./view_users.php">
                 <i class="bi bi-people">
                     <h6> View Users</h6>
                 </i>
             </a>
-            <a href="../../user/views/all_houses.php">
+            <a href="./all_houses.php">
                 <i class="bi bi-houses">
                     <h6> View Houses</h6>
                 </i>
             </a>
-            <a href="../../index.php">
+            <a href="./rent_houses.php">
                 <i class="bi bi-truck-flatbed">
                     <h6> View houses on rent</h6>
                 </i>
             </a>
-            <a href="../../index.php">
+            <a href="./property_sale.php">
                 <i class="bi bi-building">
                     <h6>Property on Sale</h6>
                 </i>
@@ -117,9 +116,9 @@
                         <input type="text" class="form-control" name="location" required>
                         <label for="">Type</label>
                         <select class="form-control" name="type" id="">
-                            <option value="1">House Sale</option>
-                            <option value="2">House Rent</option>
-                            <option value="3">Property Sale</option>
+                            <option value="House Sale">House Sale</option>
+                            <option value="House Rent">House Rent</option>
+                            <option value="Property Sale">Property Sale</option>
                         </select>
                         <label for="">Image</label>
                         <input type="file" class="form-control mt-2" name="image" id="" required>

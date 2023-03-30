@@ -234,6 +234,7 @@
                                                 <span><?php echo $row['price'] ?></span>
                                                 <p><?php echo $row['info'] ?></p>
                                                 <div class="details">
+                                                    <span><?php echo $row['type'] ?> sq ft</span>
                                                     <span><?php echo $row['size'] ?> sq ft</span>
                                                     <span><?php echo $row['bedrooms'] ?> bedrooms</span>
                                                     <span><?php echo $row['bathrooms'] ?> bathrooms</span>

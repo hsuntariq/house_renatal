@@ -50,14 +50,17 @@
                             <?php echo $row['location'] ?>
                         </span>
                     </h5>
-                    
                 <iframe width="100%" height="150px" src="https://maps.google.com/maps?q=<?php echo  $row ['location'] ?>&output=embed"></iframe>
-                        <a class="btn btn-info w-100" href="../controller/send_mail.php?id=<?php echo $row['id']?>">
-                            Contact the owner
-                        </a>
                 </div>
+                <?php 
+                    if($row['video'] != null){
+                ?>
+                <div class="col-lg-12 mt-4">
+                    <video height="200px" width="100%" style="background-size: cover;" src="../../videos/<?php echo $row['video']; ?>" autoplay muted></video>
+                </div>
+                <?php }?>
             </div>
-
+                    
         </div>
     <?php }}?>
 </body>

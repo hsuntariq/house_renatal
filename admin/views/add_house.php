@@ -59,12 +59,10 @@
                 text-light text-center  w-25 p-3 font-weight-bolder flash'>"
                 . $_SESSION['message'] ."</div>";
             }
-            session_destroy();
-            unset($_SESSION['flash']);
         ?>
         <!-- <a href="../../index.php">Home</a> -->
         <div class="sidebar">
-            <a href="../../index.php">
+            <a href="http://localhost/FYP/">
                 <i class="bi bi-house">
                     <h6> Add House</h6>
                 </i>
@@ -125,6 +123,8 @@
                         </select>
                         <label for="">Image</label>
                         <input type="file" class="form-control mt-2" name="image" id="" required>
+                        <label for="">Add A video</label>
+                        <input type="file" class="form-control mt-2" name="video" id="" required>
                         <input type="submit" class="form-control mt-2 btn btn-success" value="Add House">
                     </form>
                 </div>

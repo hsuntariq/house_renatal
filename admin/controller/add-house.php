@@ -16,11 +16,18 @@
     if(isset($_FILES['image'])){
         $filename = $_FILES['image']['name'];
         $tmp_name = $_FILES['image']['tmp_name'];
+        $type = $_FILES['image']['type'];
         move_uploaded_file($tmp_name,'../../images/' . $filename);
     }
+    if(isset($_FILES['video'])){
+        $videoname = $_FILES['video']['name'];
+        $video_tmp_name = $_FILES['video']['tmp_name'];
+        $type = $_FILES['video']['type'];
+        move_uploaded_file($video_tmp_name,'../../videos/' . $videoname);
+    }
     if(empty($errors)){
-    $insert = "INSERT INTO `houses`(`name`, `price`, `info`, `size`, `bedrooms`, `bathrooms`, `type`, `location`, `image`) 
-    VALUES ('{$name}','{$price}','{$info}',{$size},{$bedrooms},{$bathrooms},'{$type}','{$location}','{$filename}')";
+    $insert = "INSERT INTO `houses`(`name`, `price`, `info`, `size`, `bedrooms`, `bathrooms`, `type`, `location`, `image`,`video`) 
+    VALUES ('{$name}','{$price}','{$info}',{$size},{$bedrooms},{$bathrooms},'{$type}','{$location}','{$filename}','{$videoname}')";
     $query = mysqli_query($connection,$insert);
     // display the flash message
     session_start();

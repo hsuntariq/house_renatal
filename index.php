@@ -7,12 +7,22 @@
         <meta name="viewport" content="width=device-width , initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="styles.css">
+        <?php include './assets/boot.php' ; ?>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital@0;1&display=swap" rel="stylesheet">
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     </head>
 
     <body>
+        <?php
+            session_start();
+            if(isset($_SESSION['reg_error'])){
+                echo "<div class='fixed-top bg-dark m-auto
+                text-light text-center  w-25 p-3 font-weight-bolder flash'>"
+                . $_SESSION['reg_error'] ."</div>";       
+            }
+        ?>
         <div class="container">
             <header>
                 <div class="logo">
@@ -25,7 +35,23 @@
                     <li><a href="#propertis">houses</a></li>
                     <li><a href="#services">Services </a></li>
                     <li><a href="#contact">Contact </a></li>
-                    <li><a href="#" class="active">Register / login </a></li>
+                    <?php 
+                        // session_start();
+                        if(isset($_SESSION['username'])){
+                            if(isset($_SESSION['role'])){
+                                if($_SESSION['role'] == 1){
+                                    echo "<li><a href='./admin/views/add_house.php' class=''>Dashboard</a></li>";
+                                }
+                            }
+                        }
+                        if(isset($_SESSION['username'])){
+                            echo "<li><a href='./index.php' class='active'>Hello " . $_SESSION['username'] .  "</a></li>";
+                            echo "<li><a href='./user/controller/logout.php' style='font-size:1.4rem' class='text-danger'><i class='bi bi-door-open'></i></a></li>";
+
+                        }else{
+                            echo "<li><a href='#' class='active'>Register / login</a></li>";
+                        }
+                    ?>
                     <li class="menu">Close</li>
                 </ul>
                 <p>Automation of pride and property</p>
@@ -184,9 +210,17 @@
 
                             <!*----------Houses-------------------------------------------------------*>
                                 <div id="propertis">
+                                    <?php
+                                        if(!isset($_SESSION['username'])){
+                                            echo "<h1 class='text-center'>Please Login to view houses</h1>";
+                                            echo "<a href='http://localhost/FYP/index.php'>
+                                                Login/Register
+                                            </a>";
+                                        }else{
+                                    ?>
                                     <h2>high houses</h2>
                                     <div class="content">
-                                    <?php
+                                        <?php
                                         include './config/connect.php';
                                         $select = "SELECT * FROM houses ORDER BY id DESC LIMIT 4";
                                         $result = mysqli_query($connection,$select);
@@ -204,16 +238,16 @@
                                                     <span><?php echo $row['bedrooms'] ?> bedrooms</span>
                                                     <span><?php echo $row['bathrooms'] ?> bathrooms</span>
                                                 </div>
-                                                <a href="./user/views/single_house.php?id=<?php echo $row['id'] ?>">Read more</a>
+                                                <a href="./user/views/single_house.php?id=<?php echo $row['id'] ?>">Read
+                                                    more</a>
                                             </div>
                                         </div>
-                                    <?php }}
+                                        <?php }}
                                     ?>
-                            
                                     </div>
                                     <a href="./user/views/all_houses.php" class="View">View all houses</a>
                                 </div>
-
+                    <?php }?>
                                 <!*----------Services----------*>
                                     <div id="services">
                                         <h2>Our Services</h2>
@@ -443,59 +477,47 @@
                 <!*----------Register/login-------*> <div class="login-container">
                     <i class="fa fa-times" id="btn-close"></i>
                     <div class="login-box">
-                        <form>
+                        <form action="./user/controller/login.php" method="post">
                             <h2>Login</h2>
                             <label for="log-mail">
                                 <i class="fa fa-envelope-o"></i>
-                                <input type="email" name="email " id="email" required placeholder="Your Email">
+                                <input type="email" name="email" id="email" required placeholder="Your Email">
                             </label>
                             <label for="log-pass">
                                 <i class="fa fa-lock"></i>
-                                <input type="password" name="passs " id="log-pass" required placeholder="Your password">
-                            </label>
-                            <label for="chk" class="check">
-                                <input type="checkbox" name="chk " id="chk">
-                                Remember me
+                                <input type="password" name="password" id="log-pass" required placeholder="Your password">
                             </label>
                             <button type="submit">Login</button>
-                            <p>Or login with</p>
-                            <a href="#" class="btn btn-fb">
-                                <i class="fa fa-facebook"></i>
-                                Facebook
-                            </a>
-                            <a href="#" class="btn btn-gg">
-                                <i class="fa fa-google"></i>
-                                Google
-                            </a>
                             <p>Sign up <a href="#" class="next-log">Register now</a></p>
                         </form>
                     </div>
 
                     <div class="login-box hidden" id="res">
-                        <form>
+                        <form action="./user/controller/register.php" method="post">
                             <h2>Register</h2>
                             <label for="res-user">
                                 <i class="fa fa-user"></i>
-                                <input type="text" name="user " id="res-user" required placeholder="User Name">
+                                <input type="text" name="name" id="res-user" required placeholder="User Name">
                             </label>
                             <label for="res-mail">
                                 <i class="fa fa-envelope-o"></i>
-                                <input type="email" name="email " id="res-email" required placeholder="Your Email">
+                                <input type="email" name="email" id="res-email" required placeholder="Your Email">
                             </label>
                             <label for="res-pass">
                                 <i class="fa fa-lock"></i>
-                                <input type="password" name="passs " id="res-pass" required placeholder="Your password">
+                                <input type="password" name="password" id="res-pass" required
+                                    placeholder="Your password">
                             </label>
                             <label for="res-cfpass">
                                 <i class="fa fa-lock"></i>
-                                <input type="password" name="passs " id="res-cfpass" required
+                                <input type="password" name="c_password" id="res-cfpass" required
                                     placeholder="Confirm password">
                             </label>
                             <label for="chk1" class="check">
                                 <input type="checkbox" name="chk1 " id="chk1">
                                 I agree with your <span>terms</span> & <span>policies</span>
                             </label>
-                            <button type="submit">Register</button>
+                            <button type="submit" value="Submit">Register</button>
 
                             <p>Already have an account? <a href="#" class="next-log">Login now</a></p>
                         </form>
@@ -507,6 +529,12 @@
                     </div>
 
                     <script>
+                        // flash
+                        const flash = document.querySelector('.flash');
+                        setTimeout(() => {
+                            flash.style.transition = 'all .5s';
+                            flash.style.transform = "translateY(-100%)";
+                        }, 2000)
                         //login $ register
                         const loginMenu = document.querySelector('header .active');
                         const loginShow = document.querySelector('.login-container');
